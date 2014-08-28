@@ -1,0 +1,9 @@
+Buildfile: C:\Users\res\devel\FreeFormApp\deployment\build_core.xml
+
+deploy:
+    [unzip] Expanding: C:\Program Files (x86)\Mendix\5.8.0-rc1\modeler\deployment.mxz into C:\Users\res\devel\FreeFormApp\deployment
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+
+
