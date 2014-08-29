@@ -1,8 +1,9 @@
 Buildfile: C:\Users\res\devel\FreeFormApp\deployment\build_core.xml
 
 clean:
+   [delete] Deleting directory C:\Users\res\devel\FreeFormApp\deployment\model
+   [delete] Deleting directory C:\Users\res\devel\FreeFormApp\deployment\run
 
 BUILD SUCCESSFUL
 Total time: 0 seconds
-
 

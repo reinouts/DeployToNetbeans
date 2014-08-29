@@ -1,6 +1,7 @@
 Buildfile: C:\Users\res\devel\FreeFormApp\deployment\build_webui.xml
 
 clean:
+   [delete] Deleting directory C:\Users\res\devel\FreeFormApp\deployment\web
 
 BUILD SUCCESSFUL
 Total time: 0 seconds

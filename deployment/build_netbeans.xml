@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="FreeFormApp" default="all" basedir="..">    
+    <property name="deployment" location="deployment" />
+    <property name="model" location="${deployment}/model" />
+        
+    <!-- RvS: Do we need to import build-core.xml or simply override targets? -->
+    <import file="${deployment}/build_core.xml"/>
+    <import file="${basedir}/nbproject/build-impl.xml"/>
+    
+    <target name="all" depends="init,clean,compile">
+        <!-- TODO define script. See Help menu or http://ant.apache.org/ -->
+    </target>
+    
+    <!-- We override the compile target to prepare the output directories -->
+    <target depends="init" name="compile" description="Compile Java actions">
+        <mkdir dir="${deployment}/run/bin" />
+        <mkdir dir="${deployment}/model/bundles" />
+        <ant antfile="${deployment}/build_core.xml" target="compile" />        
+    </target>
+
+    <!-- The clean target in build_core.xml called from the Modeler deletes too much -->
+    <target name="clean" depends="init,clean-custom-classes" description="clean the deployment directory">
+        <delete dir="${model}" />
+        <delete>
+            <!-- TODO: find out if we actually need to delete these or not -->
+            <fileset dir="${deployment}/run/felixcache" includes="**/*" />
+            <fileset dir="${deployment}/run/i18n" includes="**/*" />
+        </delete>
+    </target>
+
+
+
+
+</project>
