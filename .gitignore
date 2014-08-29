@@ -5,3 +5,4 @@ deployment/web
 deployment/log
 deployment/run/bin
 *.lock
+deployment/model/bundles/project.jar

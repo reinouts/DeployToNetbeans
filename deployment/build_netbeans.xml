@@ -19,8 +19,7 @@
     </target>
 
     <!-- The clean target in build_core.xml called from the Modeler deletes too much -->
-    <target name="clean" depends="init,clean-custom-classes" description="clean the deployment directory">
-        <delete dir="${model}" />
+    <target name="clean" depends="init,clean-custom-classes" description="clean the deployment directory">        
         <delete>
             <!-- TODO: find out if we actually need to delete these or not -->
             <fileset dir="${deployment}/run/felixcache" includes="**/*" />

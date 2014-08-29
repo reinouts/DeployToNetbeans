@@ -45,7 +45,7 @@ auxiliary.show.customizer.message=<message>
                 </action>
                 <action name="run">
                     <script>${ant.script}</script>
-                    <target>deploy</target>
+                    <target>run</target>
                 </action>
             </ide-actions>
             <export>
