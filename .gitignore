@@ -3,3 +3,4 @@ run/felixcache
 deployment/run/felixcache
 deployment/web
 deployment/log
+deployment/run/bin
