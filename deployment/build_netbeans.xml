@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="FreeFormApp" default="all" basedir="..">    
-    <property name="deployment" location="deployment" />
+<project name="FreeFormApp_netbeans" default="all" basedir="C:/Users/res/devel/FreeFormApp">    
+    <property name="deployment" location="${basedir}/deployment" />
     <property name="model" location="${deployment}/model" />
         
     <!-- RvS: Do we need to import build-core.xml or simply override targets? -->
@@ -28,6 +28,71 @@
         </delete>
     </target>
 
+    <target name="-init-macrodef-java">
+        <macrodef name="java" uri="http://www.netbeans.org/ns/j2se-project/1">
+            <attribute default="${main.class}" name="classname"/>
+            <attribute default="${run.classpath}" name="classpath"/>
+            <attribute default="jvm" name="jvm"/>
+            <element name="customize" optional="true"/>
+            <sequential>
+                <java classname="@{classname}" dir="${deployment}" fork="true" jvm="${platform.java}">
+                    <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
+                    <jvmarg value="-Dfile.encoding=${runtime.encoding}"/>
+                    <redirector errorencoding="${runtime.encoding}" inputencoding="${runtime.encoding}" outputencoding="${runtime.encoding}"/>
+                    <jvmarg line="${run.jvmargs}"/>
+                    <jvmarg line="${run.jvmargs.ide}"/>
+                    <classpath>
+                        <path path="@{classpath}"/>
+                    </classpath>
+                    <syspropertyset>
+                        <propertyref prefix="run-sys-prop."/>
+                        <mapper from="run-sys-prop.*" to="*" type="glob"/>
+                    </syspropertyset>
+                    <env key="M2EE_ADMIN_PASS" value="${m2ee.admin.pass}"/>
+                    <env key="M2EE_ADMIN_PORT" value="${m2ee.admin.port}"/>
+                    <env key="M2EE_CONSOLE_PATH" file="${mendix.install.dir}/modeler/MendixConsoleLog.exe"/>
+                    <env key="MXCONSOLE_BASE_PATH" path="${deployment}"/>
+                    <env key="MXCONSOLE_RUNTIME_PATH" path="${mendix.install.dir}/runtime"/>
+                    <env key="MXCONSOLE_RUNTIME_PORT" value="${mxconsole.runtime.port}"/>
+                    <env key="MXCONSOLE_SERVER_URL" value="${mxconsole.server.url}"/>
+                    <customize/>
+                </java>
+            </sequential>
+        </macrodef>
+    </target>
+    <target depends="-init-debug-args" name="-init-macrodef-debug">
+        <macrodef name="debug" uri="http://www.netbeans.org/ns/j2se-project/3">
+            <attribute default="${main.class}" name="classname"/>
+            <attribute default="${debug.classpath}" name="classpath"/>
+            <element name="customize" optional="true"/>
+            <sequential>
+                <java classname="@{classname}" dir="${work.dir}" fork="true" jvm="${platform.java}">
+                    <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
+                    <jvmarg line="${debug-args-line}"/>
+                    <jvmarg value="-Xrunjdwp:transport=${debug-transport},address=${jpda.address}"/>
+                    <jvmarg value="-Dfile.encoding=${runtime.encoding}"/>
+                    <redirector errorencoding="${runtime.encoding}" inputencoding="${runtime.encoding}" outputencoding="${runtime.encoding}"/>
+                    <jvmarg line="${run.jvmargs}"/>
+                    <jvmarg line="${run.jvmargs.ide}"/>
+                    <classpath>
+                        <path path="@{classpath}"/>
+                    </classpath>
+                    <syspropertyset>
+                        <propertyref prefix="run-sys-prop."/>
+                        <mapper from="run-sys-prop.*" to="*" type="glob"/>
+                    </syspropertyset>
+                    <env key="M2EE_ADMIN_PASS" value="${m2ee.admin.pass}"/>
+                    <env key="M2EE_ADMIN_PORT" value="${m2ee.admin.port}"/>
+                    <env key="M2EE_CONSOLE_PATH" file="${mendix.install.dir}/modeler/MendixConsoleLog.exe"/>
+                    <env key="MXCONSOLE_BASE_PATH" path="${deployment}"/>
+                    <env key="MXCONSOLE_RUNTIME_PATH" path="${mendix.install.dir}/runtime"/>
+                    <env key="MXCONSOLE_RUNTIME_PORT" value="${mxconsole.runtime.port}"/>
+                    <env key="MXCONSOLE_SERVER_URL" value="${mxconsole.server.url}"/>
+                    <customize/>
+                </java>
+            </sequential>
+        </macrodef>
+    </target>
 
 
 
